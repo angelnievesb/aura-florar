@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aura Floral - Catálogo</title>
+    <style>
+        /* --- ESTILOS (CSS) --- */
+        :root {
+            --color-fondo: #ffffff; 
+            --color-principal: #a53160; /* Rosa floral */
+            --color-secundario: #4caf50; /* Verde hoja */
+            --color-texto: #333333; 
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: var(--color-fondo);
+            color: var(--color-texto);
+        }
+
+        /* --- Menú de Navegación --- */
+        nav {
+            background-color: #333;
+            text-align: center;
+            padding: 15px 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin: 0 20px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: var(--color-principal);
+        }
+
+        /* Encabezado */
+        header {
+            background-color: var(--color-principal);
+            color: white;
+            text-align: center;
+            padding: 2.5rem 0;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 3rem;
+            letter-spacing: 2px;
+            font-family: 'Georgia', serif;
+        }
+
+        header p {
+            margin-top: 10px;
+            font-style: italic;
+            font-size: 1.2rem;
+        }
+
+        /* Contenedor principal */
+        main {
+            max-width: 1000px;
+            margin: 2rem auto;
+            padding: 0 20px;
+        }
+
+        h2 {
+            text-align: center;
+            color: var(--color-secundario);
+            margin-bottom: 2rem;
+            border-bottom: 2px solid var(--color-principal);
+            display: inline-block;
+            padding-bottom: 5px;
+        }
+
+        .center-title {
+            text-align: center;
+        }
+
+        /* Catálogo de flores (Cuadrícula) */
+        .catalogo {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .producto {
+            background-color: white;
+            border-radius: 10px;
+            padding: 15px;
+            text-align: center;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+            transition: transform 0.3s ease;
+            border: 1px solid #f0f0f0;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .producto:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .producto img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 8px;
+            transition: opacity 0.3s ease;
+        }
+
+        .precio {
+            color: var(--color-secundario);
+            font-size: 1.2rem;
+            font-weight: bold;
+            margin: 10px 0;
+            margin-top: auto;
+        }
+
+        /* Botones */
+        .btn-comprar {
+            background-color: var(--color-secundario);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: background-color 0.3s;
+            width: 100%;
+        }
+
+        .btn-comprar:hover {
+            background-color: #388e3c;
+        }
+
+        /* --- Selector de Color --- */
+        .color-section {
+            margin: 15px 0;
+            text-align: left;
+        }
+
+        .current-color-display {
+            display: flex;
+            align-items: center;
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 5px;
+            margin-bottom: 10px;
+            font-size: 0.9rem;
+            font-weight: bold;
+            color: #555;
+        }
+
+        .current-color-dot {
+            width: 14px;
+            height: 14px;
+            border-radius: 50%;
+            display: inline-block;
+            margin-right: 8px;
+            border: 1px solid #ccc;
+        }
+
+        .color-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            justify-content: center;
+        }
+
+        .color-swatch {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            border: 2px solid transparent;
+            cursor: pointer;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: transform 0.2s;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            padding: 0;
+            overflow: hidden;
+        }
+
+        .color-swatch:hover {
+            transform: scale(1.15);
+        }
+
+        .color-swatch.blanco {
+            border: 1px solid #ccc;
+        }
+
+        .color-swatch.selected {
+            border-color: #333;
+        }
+
+        .color-swatch.selected::after {
+            content: '✓';
+            color: white;
+            font-size: 16px;
+            font-weight: bold;
+            text-shadow: 0px 0px 3px rgba(0,0,0,0.6);
+        }
+
+        /* Pie de página */
+        footer {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 1.5rem 0;
+            margin-top: 3rem;
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <a href="index.html">Catálogo</a>
+        <a href="suscripcion.html">Suscripciones</a>
+    </nav>
+
+    <header>
+        <h1>Aura Floral</h1>
+        <p>Tu conexión con la naturaleza, entregada con amor</p>
+    </header>
+
+    <main>
+        <div class="center-title">
+            <h2>Catálogo de Temporada</h2>
+        </div>
+        
+        <section class="catalogo">
+            
+            <div class="producto">
+                <img src="rosas rojas.jpeg" alt="Ramo de 100 Rosas" class="product-image">
+                <h3>Ramos de 100 rosas</h3>
+                <p>Clásico y elegante para expresar amor con un ramo de 100 rosas.</p>
+
+                <div class="color-section">
+                    <div class="current-color-display">
+                        <span class="current-color-dot" style="background: #c62828;"></span>
+                        <span class="current-color-name">Rojo</span>
+                    </div>
+                    <div class="color-grid">
+                        <button class="color-swatch selected" style="background: #c62828;" data-name="Rojo" data-img="rosas rojas.jpeg"></button>
+                        <button class="color-swatch" style="background: #ff7ba7;" data-name="Rosa Pastel" data-img="rosas rosa fuerte.jpeg"></button>
+                        <button class="color-swatch" style="background: #ca2fca;" data-name="lila" data-img="lilas de 100.jpeg"></button>
+                        <button class="color-swatch blanco" style="background: #ffffff;" data-name="Blanco" data-img="100 rosas blancas .jpeg"></button>
+                    </div>
+                </div>
+
+                <div class="precio">$3,000 MXN</div>
+                <button class="btn-comprar" onclick="alert('Ramo de 100 Rosas agregado al carrito.')">Agregar al carrito</button>
+            </div>
+
+            <div class="producto">
+                <img src="50 rosas rojas.jpeg" alt="Ramo de 50 Rosas" class="product-image">
+                <h3>Ramos de 50 rosas</h3>
+                <p>Expresa todo tu amor con un ramo de 50 rosas.</p>
+
+                <div class="color-section">
+                    <div class="current-color-display">
+                        <span class="current-color-dot" style="background: #c62828;"></span>
+                        <span class="current-color-name">Rojo</span>
+                    </div>
+                    <div class="color-grid">
+                        <button class="color-swatch selected" style="background: #c62828;" data-name="Rojo" data-img="50 rosas rojas.jpeg"></button>
+                        <button class="color-swatch" style="background: #ff7ba7;" data-name="Rosa Pastel" data-img="rosas rosa pastel de 50.jpeg"></button>
+                        <button class="color-swatch" style="background: #c04ead;" data-name="Lila" data-img="50 rosas lilas.jpeg"></button>
+                        <button class="color-swatch blanco" style="background: #ffffff;" data-name="Blanco" data-img="rosas blancas de 50 .jpeg"></button>
+                    </div>
+                </div>
+
+                <div class="precio">$2,000 MXN</div>
+                <button class="btn-comprar" onclick="alert('Ramo de 50 Rosas agregado al carrito.')">Agregar al carrito</button>
+            </div>
+            
+            <div class="producto">
+                <img src="tulipanes rojos.jpeg" alt="Tulipanes" class="product-image">
+                <h3>Tulipanes</h3>
+                <p>Dile a esa persona especial lo mucho que significa para ti.</p>
+
+                <div class="color-section">
+                    <div class="current-color-display">
+                        <span class="current-color-dot" style="background: #c62828;"></span>
+                        <span class="current-color-name">Rojo</span>
+                    </div>
+                    <div class="color-grid">
+                        <button class="color-swatch selected" style="background: #c62828;" data-name="Rojo" data-img="tulipanes rojos.jpeg"></button>
+                        <button class="color-swatch" style="background: #ff7ba7;" data-name="Rosa Pastel" data-img="tulipanes rosa pastel.jpeg"></button>
+                        <button class="color-swatch" style="background: #c04ead;" data-name="Lila" data-img="TULIPANES LILAS .jpeg"></button>
+                        <button class="color-swatch blanco" style="background: #ffffff;" data-name="Blanco" data-img="tulipanes color blanco.jpeg"></button>
+                    </div>
+                </div>
+
+                <div class="precio">$1,200 MXN</div>
+                <button class="btn-comprar" onclick="alert('Tulipanes agregados al carrito.')">Agregar al carrito</button>
+            </div>
+
+                       <div class="producto">
+                <img src="orquideas lila.jpeg" alt="Orquideas" class="product-image">
+                <h3>Orquideas</h3>
+                <p>Para dar el mismo cuidado que a esa persona especial.</p>
+
+                <div class="color-section">
+                    <div class="current-color-display">
+                        <span class="current-color-dot" style="background: #ca2fca;"></span>
+                        <span class="current-color-name">Lila</span>
+                    </div>
+                    <div class="color-grid">
+                        <button class="color-swatch selected" style="background: #ca2fca;" data-name="Lila" data-img="orquideas lila.jpeg"></button>
+                        <button class="color-swatch" style="background: #ff7ba7;" data-name="Rosa Pastel" data-img="orquideas color rosa.jpeg"></button>
+                        <button class="color-swatch blanco" style="background: #ffffff;" data-name="Blanco" data-img="orquideas blancas.jpeg"></button>
+                    </div>
+                </div>
+
+                <div class="precio">$600 MXN</div>
+                <button class="btn-comprar" onclick="alert('Ramo de 100 Rosas agregado al carrito.')">Agregar al carrito</button>
+            </div>
+
+            <div class="producto">
+                <img src="ortensia azul .jpeg" alt="Ramo de 50 Rosas" class="product-image">
+                <h3>Hortencias</h3>
+                <p>El amor es como las flores, debes regarlo todos los días para que nunca se marchite.</p>
+
+                <div class="color-section">
+                    <div class="current-color-display">
+                        <span class="current-color-dot" style="background: #62aeec;"></span>
+                        <span class="current-color-name">Azul</span>
+                    </div>
+                    <div class="color-grid">
+                        <button class="color-swatch selected" style="background: #62aeec;" data-name="Azul" data-img="ortensia azul .jpeg"></button>
+                        <button class="color-swatch" style="background: #32bb48;" data-name="Verde" data-img="hortencias verdes.jpeg"></button>
+                        <button class="color-swatch blanco" style="background: #ffffff;" data-name="Blanco" data-img="hortencias blanco.jpeg"></button>
+                    </div>
+                </div>
+
+                <div class="precio">$2,000 MXN</div>
+                <button class="btn-comprar" onclick="alert('Ramo de 50 Rosas agregado al carrito.')">Agregar al carrito</button>
+            </div>
+            <div class="producto">
+                <img src="girasoles ramo.jpeg" alt="Girasoles" class="product-image">
+                <h3>Girasoles</h3>
+                <p>Ideal para alegrar el día de esa persona especial.</p>
+                <div class="precio">$380 MXN</div>
+                <button class="btn-comprar" onclick="alert('Girasoles agregados al carrito.')">Agregar al carrito</button>
+            </div>
+
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 Aura Floral. Todos los derechos reservados.</p>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const productos = document.querySelectorAll('.producto');
+
+            productos.forEach(producto => {
+                const swatches = producto.querySelectorAll('.color-swatch');
+                if (swatches.length === 0) return; 
+
+                const colorNameDisplay = producto.querySelector('.current-color-name');
+                const colorDotDisplay = producto.querySelector('.current-color-dot');
+                const productImage = producto.querySelector('.product-image');
+
+                swatches.forEach(swatch => {
+                    swatch.addEventListener('click', () => {
+                        swatches.forEach(s => s.classList.remove('selected'));
+                        swatch.classList.add('selected');
+
+                        colorNameDisplay.textContent = swatch.getAttribute('data-name');
+                        
+                        // Captura tanto colores simples como degradados
+                        colorDotDisplay.style.background = swatch.style.background;
+
+                        const newImgSrc = swatch.getAttribute('data-img');
+                        if (newImgSrc) {
+                            productImage.src = newImgSrc;
+                        }
+                    });
+                });
+            });
+        });
+    </script>
+
+</body>
+</html>

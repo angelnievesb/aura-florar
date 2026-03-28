@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aura Floral - Suscripciones</title>
+    <style>
+        /* --- ESTILOS (CSS) --- */
+        :root {
+            --color-fondo: #ffffff; 
+            --color-principal: #a53160; 
+            --color-secundario: #4caf50; 
+            --color-texto: #333333; 
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: var(--color-fondo);
+            color: var(--color-texto);
+        }
+
+        /* --- Menú de Navegación --- */
+        nav {
+            background-color: #333;
+            text-align: center;
+            padding: 15px 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin: 0 20px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: var(--color-principal);
+        }
+
+        /* Encabezado */
+        header {
+            background-color: var(--color-principal);
+            color: white;
+            text-align: center;
+            padding: 2.5rem 0;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 3rem;
+            letter-spacing: 2px;
+            font-family: 'Georgia', serif;
+        }
+
+        header p {
+            margin-top: 10px;
+            font-style: italic;
+            font-size: 1.2rem;
+        }
+
+        /* Contenedor principal */
+        main {
+            max-width: 800px;
+            margin: 2rem auto;
+            padding: 0 20px;
+            min-height: 50vh;
+        }
+
+        /* Sección de Suscripción */
+        .suscripcion-container {
+            background-color: #fff0f3; 
+            border: 2px dashed var(--color-principal);
+            border-radius: 15px;
+            padding: 2.5rem;
+            text-align: center;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+        }
+
+        .suscripcion-container h2 {
+            color: var(--color-secundario);
+            margin-bottom: 2rem;
+            border-bottom: 2px solid var(--color-principal);
+            display: inline-block;
+            padding-bottom: 5px;
+        }
+
+        .suscripcion-container p {
+            max-width: 600px;
+            margin: 0 auto 20px auto;
+            line-height: 1.6;
+            color: #555;
+        }
+
+        .suscripcion-form {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            max-width: 400px;
+            margin: 0 auto;
+            text-align: left;
+        }
+
+        .suscripcion-form label {
+            font-weight: bold;
+            color: var(--color-secundario);
+            font-size: 0.9rem;
+        }
+
+        .suscripcion-form input, .suscripcion-form select {
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-family: inherit;
+            font-size: 1rem;
+        }
+
+        .suscripcion-form input:focus, .suscripcion-form select:focus {
+            outline: none;
+            border-color: var(--color-principal);
+        }
+
+        .btn-comprar {
+            background-color: var(--color-secundario);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 1.1rem;
+            transition: background-color 0.3s;
+            margin-top: 15px;
+            width: 100%;
+        }
+
+        .btn-comprar:hover {
+            background-color: #388e3c;
+        }
+
+        /* Pie de página */
+        footer {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 1.5rem 0;
+            margin-top: 3rem;
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <a href="index.html">Catálogo</a>
+        <a href="suscripcion.html">Suscripciones</a>
+    </nav>
+
+    <header>
+        <h1>Aura Floral</h1>
+        <p>Tu conexión con la naturaleza, entregada con amor</p>
+    </header>
+
+    <main>
+        <section class="suscripcion-container">
+            <h2>Suscripción "Aura Continua"</h2>
+            <p>Haz que la magia dure todo el año. Suscríbete y nosotros nos encargaremos de enviar un ramo con flores de temporada que van cambiando mes con mes, directamente a la puerta de esa persona especial.</p>
+            
+            <form class="suscripcion-form" onsubmit="event.preventDefault(); alert('¡Gracias por elegir la suscripción Aura Continua! Te redirigiremos al portal de pagos.');">
+                
+                <label for="nombre-destinatario">Nombre de quien recibirá las flores:</label>
+                <input type="text" id="nombre-destinatario" placeholder="Ej. Ana López" required>
+
+                <label for="direccion">Dirección de entrega:</label>
+                <input type="text" id="direccion" placeholder="Calle, Número, Colonia, Código Postal" required>
+
+                <button type="submit" class="btn-comprar">Suscribirme por $500 MXN / mes</button>
+            </form>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 Aura Floral. Todos los derechos reservados.</p>
+    </footer>
+
+</body>
+</html>
